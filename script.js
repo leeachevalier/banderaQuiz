@@ -14,6 +14,15 @@ let paisCorrecto = null;
 let puntos = 0;
 let modo = "libre";
 
+// Puntuación máxima en modo libre
+let maxPuntajeLibre = parseInt(localStorage.getItem("maxLibre") || "0");
+
+// Mostrar también el récord
+const record = document.createElement("p");
+record.id = "record";
+record.textContent = `🏅 Récord personal: ${maxPuntajeLibre}`;
+puntaje.insertAdjacentElement("afterend", record);
+
 // Cambiar de modo
 modoSelect.addEventListener("change", () => {
   modo = modoSelect.value;
@@ -25,34 +34,35 @@ modoSelect.addEventListener("change", () => {
 
   if (modo === "libre") {
     filtroRegion.classList.remove("oculto");
+    record.classList.remove("oculto");
+    record.textContent = `🏅 Récord personal: ${maxPuntajeLibre}`;
     cargarPaises(regionSelect.value);
   } else {
     filtroRegion.classList.add("oculto");
+    record.classList.add("oculto");
     cargarPaises("all");
   }
 });
 
-
+// Cambiar de región
 regionSelect.addEventListener("change", () => {
   puntos = 0;
   puntaje.textContent = "Puntos: 0";
   cargarPaises(regionSelect.value);
 });
 
-
+// Botón siguiente
 btnSiguiente.addEventListener("click", () => {
   nuevaPregunta();
 });
 
-
+// Cargar países
 function cargarPaises(region = "all") {
   const base = "https://restcountries.com/v3.1";
   const fields = "?fields=name,flags,translations,region";
   const url = region === "all"
     ? `${base}/all${fields}`
     : `${base}/region/${region}${fields}`;
-
-  console.log("Cargando desde:", url); // debug
 
   fetch(url)
     .then(res => {
@@ -129,11 +139,20 @@ function verificarRespuesta(paisSeleccionado) {
 
     if (modo === "challenge") {
       guardarEnLeaderboard();
+    } else if (modo === "libre") {
+      if (puntos > maxPuntajeLibre) {
+        maxPuntajeLibre = puntos;
+        localStorage.setItem("maxLibre", maxPuntajeLibre);
+        record.textContent = `🏅 Récord personal: ${maxPuntajeLibre}`;
+      }
+
+      puntos = 0;
+      puntaje.textContent = `Puntos: 0`;
     }
   }
 }
 
-// Guardar puntaje
+// Guardar en leaderboard
 function guardarEnLeaderboard() {
   const nombre = prompt("❌ ¡Fallaste! Ingresá tu nombre para guardar tu puntaje:");
   if (!nombre) return;
@@ -148,7 +167,7 @@ function guardarEnLeaderboard() {
   mostrarLeaderboard();
 }
 
-// Mostrar top 5
+// Mostrar leaderboard
 function mostrarLeaderboard() {
   leaderboard.classList.remove("oculto");
   ranking.innerHTML = "";
@@ -162,5 +181,5 @@ function mostrarLeaderboard() {
   });
 }
 
-
+// Iniciar
 cargarPaises("all");

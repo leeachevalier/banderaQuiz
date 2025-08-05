@@ -1,0 +1,153 @@
+body {
+  background-color: #1e1e2f;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+}
+
+.contenedor {
+  max-width: 500px;
+  margin: 40px auto;
+  background-color: #2b2b40;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #00ffff;
+  margin-bottom: 20px;
+}
+
+label, select, p {
+  font-size: 16px;
+  color: #eee;
+  margin-bottom: 10px;
+}
+
+#bandera {
+  width: 80%;
+  max-width: 300px;
+  margin: 20px auto;
+  border-radius: 10px;
+  border: 2px solid #00ffff;
+}
+
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.opciones button {
+  background-color: #3e3e60;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.opciones button:hover {
+  background-color: #00ffff;
+  color: #2b2b40;
+}
+
+#siguiente {
+  background-color: #ff00aa;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.2s ease-in-out;
+}
+
+#siguiente:hover {
+  background-color: #e60098;
+}
+
+#resultado {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 10px;
+  color: lightgreen;
+}
+
+.oculto {
+  display: none;
+}
+
+/* Leaderboard */
+#leaderboard {
+  margin-top: 20px;
+}
+
+#ranking {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#ranking li {
+  background-color: #3a3a55;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #00ffff;
+}
+
+
+@media screen and (max-width: 600px) {
+  .contenedor {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  #bandera {
+    width: 100%;
+  }
+
+  .opciones button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #siguiente {
+    width: 100%;
+    font-size: 15px;
+  }
+}
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+  color: #fff;
+}
+
+select {
+  background-color: #3e3e60;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 15px;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  width: 100%;
+  max-width: 250px;
+}
+
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

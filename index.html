@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz de Banderas</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Quiz de Banderas</h1>
+
+    <label for="modo">Modo de juego:</label>
+    <select id="modo">
+      <option value="libre"> Juego Libre</option>
+      <option value="challenge"> Challenge</option>
+    </select>
+
+    <div id="filtroRegion">
+      <label for="region">Filtrar por continente:</label>
+      <select id="region">
+        <option value="all">🌍 Todos</option>
+        <option value="africa">🌍 África</option>
+        <option value="americas">🌎 América</option>
+        <option value="asia">🌏 Asia</option>
+        <option value="europe">🌍 Europa</option>
+        <option value="oceania">🌍 Oceanía</option>
+      </select>
+    </div>
+
+    <p id="puntaje">Puntos: 0</p>
+
+    <img id="bandera" src="" alt="Bandera" />
+
+    <div id="opciones" class="opciones"></div>
+
+    <p id="resultado"></p>
+    <button id="siguiente">Siguiente</button>
+
+    <div id="leaderboard" class="oculto">
+      <h2>🏆 Leaderboard Challenge</h2>
+      <ul id="ranking"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

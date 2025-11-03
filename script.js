@@ -14,16 +14,16 @@ let paisCorrecto = null;
 let puntos = 0;
 let modo = "libre";
 
-// Puntuación máxima en modo libre
+
 let maxPuntajeLibre = parseInt(localStorage.getItem("maxLibre") || "0");
 
-// Mostrar también el récord
+
 const record = document.createElement("p");
 record.id = "record";
-record.textContent = `🏅 Récord personal: ${maxPuntajeLibre}`;
+record.textContent = `Récord personal: ${maxPuntajeLibre}`;
 puntaje.insertAdjacentElement("afterend", record);
 
-// Cambiar de modo
+
 modoSelect.addEventListener("change", () => {
   modo = modoSelect.value;
   puntos = 0;
@@ -35,7 +35,7 @@ modoSelect.addEventListener("change", () => {
   if (modo === "libre") {
     filtroRegion.classList.remove("oculto");
     record.classList.remove("oculto");
-    record.textContent = `🏅 Récord personal: ${maxPuntajeLibre}`;
+    record.textContent = `Récord personal: ${maxPuntajeLibre}`;
     cargarPaises(regionSelect.value);
   } else {
     filtroRegion.classList.add("oculto");
@@ -44,19 +44,19 @@ modoSelect.addEventListener("change", () => {
   }
 });
 
-// Cambiar de región
+
 regionSelect.addEventListener("change", () => {
   puntos = 0;
   puntaje.textContent = "Puntos: 0";
   cargarPaises(regionSelect.value);
 });
 
-// Botón siguiente
+
 btnSiguiente.addEventListener("click", () => {
   nuevaPregunta();
 });
 
-// Cargar países
+
 function cargarPaises(region = "all") {
   const base = "https://restcountries.com/v3.1";
   const fields = "?fields=name,flags,translations,region";
@@ -93,7 +93,7 @@ function cargarPaises(region = "all") {
     });
 }
 
-// Generar nueva pregunta
+
 function nuevaPregunta() {
   resultado.textContent = "";
   opcionesDiv.innerHTML = "";
@@ -120,7 +120,7 @@ function nuevaPregunta() {
   });
 }
 
-// Verificar respuesta
+
 function verificarRespuesta(paisSeleccionado) {
   const correcta = paisCorrecto.translations?.spa?.common || paisCorrecto.name.common;
   const elegida = paisSeleccionado.translations?.spa?.common || paisSeleccionado.name.common;
@@ -129,12 +129,12 @@ function verificarRespuesta(paisSeleccionado) {
   botones.forEach(btn => btn.disabled = true);
 
   if (correcta === elegida) {
-    resultado.textContent = "✅ ¡Correcto!";
+    resultado.textContent = "¡Correcto!";
     resultado.style.color = "lightgreen";
     puntos += 1;
     puntaje.textContent = `Puntos: ${puntos}`;
   } else {
-    resultado.textContent = `❌ Incorrecto. Era: ${correcta}`;
+    resultado.textContent = `Incorrecto. Era: ${correcta}`;
     resultado.style.color = "salmon";
 
     if (modo === "challenge") {
@@ -143,7 +143,7 @@ function verificarRespuesta(paisSeleccionado) {
       if (puntos > maxPuntajeLibre) {
         maxPuntajeLibre = puntos;
         localStorage.setItem("maxLibre", maxPuntajeLibre);
-        record.textContent = `🏅 Récord personal: ${maxPuntajeLibre}`;
+        record.textContent = ` Récord personal: ${maxPuntajeLibre}`;
       }
 
       puntos = 0;
@@ -152,9 +152,9 @@ function verificarRespuesta(paisSeleccionado) {
   }
 }
 
-// Guardar en leaderboard
+
 function guardarEnLeaderboard() {
-  const nombre = prompt("❌ ¡Fallaste! Ingresá tu nombre para guardar tu puntaje:");
+  const nombre = prompt("¡Fallaste! Ingresá tu nombre para guardar tu puntaje:");
   if (!nombre) return;
 
   const entrada = { nombre, puntos };
@@ -167,7 +167,7 @@ function guardarEnLeaderboard() {
   mostrarLeaderboard();
 }
 
-// Mostrar leaderboard
+
 function mostrarLeaderboard() {
   leaderboard.classList.remove("oculto");
   ranking.innerHTML = "";
@@ -181,5 +181,5 @@ function mostrarLeaderboard() {
   });
 }
 
-// Iniciar
+
 cargarPaises("all");
